@@ -42,7 +42,7 @@ public class MagicProjectile : MonoBehaviour, IProjectile
     {
         if ((_targetLayers & 1 << other.gameObject.layer) != 0)
         {
-            other.GetComponent<Character>().TakeDamage(_owner.WeaponStats.WeaponDamage);
+            other.GetComponent<Character>()?.TakeDamage(_owner.WeaponStats.WeaponDamage);
 
             if (!hasCollided)
             {

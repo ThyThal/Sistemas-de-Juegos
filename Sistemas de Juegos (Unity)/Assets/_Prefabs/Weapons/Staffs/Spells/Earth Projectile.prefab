@@ -91,6 +91,6 @@ MonoBehaviour:
   _myRigidbody: {fileID: 8101070947441270284}
   _targetLayers:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 65600
   _owner: {fileID: 0}
   impactNormal: {x: 0, y: 0, z: 0}
