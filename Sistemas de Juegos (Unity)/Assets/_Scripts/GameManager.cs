@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    GameManager Instance;
+    public static GameManager Instance;
     private void Awake()
     {
         if (Instance == null)
@@ -17,4 +17,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
+
+    [SerializeField] private PlayerController _playerController;
+    public PlayerController Player => _playerController;
 }

@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Weapon
+  - Enemy
+  - Ground
+  - Projectile Player
+  - Lootable
   layers:
   - Default
   - TransparentFX
@@ -11,17 +16,17 @@ TagManager:
   - 
   - Water
   - UI
+  - Ground
+  - 
+  - 
+  - Lootable
+  - Projectile Player
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
