@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Fire Staff (Epic)
   _weaponSpellPrefab: {fileID: 4051005117777638672, guid: 97a887899c07e894d9f108b976ce154c, type: 3}
+  _rarityRadius: {fileID: 2705983362980728015, guid: e34e70c817e80484daf75b225c2c759c, type: 3}
+  _rarityBeam: {fileID: 143614, guid: 15e4b43b54d2fcd45b126ed2a75619c8, type: 3}
   _weaponDamage: 100
   _weaponSpellSpeed: 40

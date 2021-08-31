@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Water Staff (Rare)
   _weaponSpellPrefab: {fileID: 811980241727973207, guid: 0dbfe47f979a6f14da5737e8b91549ec, type: 3}
+  _rarityRadius: {fileID: 164332, guid: f4445b3f185ae7d408a4658e93d4da8c, type: 3}
+  _rarityBeam: {fileID: 186344, guid: ec6b063d902582d47a439041f5d4370f, type: 3}
   _weaponDamage: 50
   _weaponSpellSpeed: 30

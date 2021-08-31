@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _tutorialManager = GameObject.FindWithTag("Tutorial").GetComponent<TutorialManager>();
+    }
+
+    [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private PlayerController _playerController;
     public PlayerController Player => _playerController;
+    public TutorialManager TutorialManager => _tutorialManager;
 }

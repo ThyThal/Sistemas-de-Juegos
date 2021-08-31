@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 734902488076912889}
   - component: {fileID: -1236325632229546489}
   - component: {fileID: 2373950295638317559}
+  - component: {fileID: 7001569252419689697}
   m_Layer: 16
   m_Name: Chicken
   m_TagString: Enemy
@@ -407,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da1a6e3c569b0b43988e5786f2ce1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 100
+  _maxLife: 25
   _currentLife: 0
 --- !u!135 &2373950295638317559
 SphereCollider:
@@ -417,11 +418,27 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820383695071572933}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10121985
-  m_Center: {x: 0, y: 0.1801718, z: 0}
+  m_Radius: 0.1409699
+  m_Center: {x: 0, y: 0.14042182, z: 0}
+--- !u!54 &7001569252419689697
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820383695071572933}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &820429208458813759
 GameObject:
   m_ObjectHideFlags: 0
