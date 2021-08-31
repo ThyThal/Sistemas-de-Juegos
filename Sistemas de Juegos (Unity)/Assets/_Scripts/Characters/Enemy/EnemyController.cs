@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class EnemyController : Character
 {
-
+    [SerializeField] private Animator _animator;
+    public Animator Animator => _animator;
 }
