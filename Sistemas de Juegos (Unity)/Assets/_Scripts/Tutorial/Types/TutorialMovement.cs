@@ -27,7 +27,8 @@ public class TutorialMovement : TutorialWindow, ITutorial
     // Interface Tutorial
     public IEnumerator TutorialStart()
     {
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        Animator.SetTrigger("Start");
     }
     public void TutorialFinish()
     {

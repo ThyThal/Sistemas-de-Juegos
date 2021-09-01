@@ -34,6 +34,8 @@ public class TutorialLoot : TutorialWindow, ITutorial
     // Interface Tutorial
     public IEnumerator TutorialStart()
     {
+        Animator.SetTrigger("Start");
+
         // Spawn Rewards
         yield return new WaitForSeconds(1f);
         _epicReward.SetActive(true);

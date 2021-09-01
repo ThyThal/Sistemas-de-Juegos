@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class TutorialManager : MonoBehaviour
 {
-
     [Header("Tutorial Managers")]
     [SerializeField] private TutorialMovement _tutorialMovement;
     [SerializeField] private TutorialAttack _tutorialAttack;
@@ -68,7 +67,6 @@ public class TutorialManager : MonoBehaviour
             _tutorialIndex++;
         }
     }
-
     public void FinishedTutorial()
     {
         var currentTutorial = _tutorialWindows[_tutorialIndex].GetComponent<TutorialWindow>();

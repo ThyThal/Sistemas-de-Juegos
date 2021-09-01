@@ -23,6 +23,8 @@ public class TutorialAttack : TutorialWindow, ITutorial
     // Interface Tutorial
     public IEnumerator TutorialStart()
     {
+        Animator.SetTrigger("Start");
+
         // Move Enemy Platforms.
         _enemyPlatforms.DOMove(new Vector3(0, 0, 0), 1f);
         yield return new WaitForSeconds(1f);
