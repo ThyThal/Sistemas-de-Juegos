@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Earth Staff (Common)
   _weaponSpellPrefab: {fileID: 6501817363121866371, guid: f86f85e5374f2db41bdac91175bdec88, type: 3}
+  _rarityRadius: {fileID: 0}
+  _rarityBeam: {fileID: 0}
   _weaponDamage: 25
-  _weaponSpellSpeed: 20
+  _weaponSpellSpeed: 40

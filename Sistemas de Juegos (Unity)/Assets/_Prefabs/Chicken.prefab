@@ -545,6 +545,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 99b183b5898f98c44a42408d0c4d98b0, type: 3}
   _meshRenderer: {fileID: 760020340311686063}
   _collider: {fileID: 3824999576123604398}
+  isTutorial: 1
   _animator: {fileID: 734902488076912889}
   _idleVariationTimer: {x: 10, y: 20}
   _idleSoundTimer: {x: 4, y: 10}

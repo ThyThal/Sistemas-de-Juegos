@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class MagicProjectile : MonoBehaviour, IProjectile
 {
@@ -42,7 +43,14 @@ public class MagicProjectile : MonoBehaviour, IProjectile
     {
         if ((_targetLayers & 1 << other.gameObject.layer) != 0)
         {
-            other.GetComponent<Character>()?.TakeDamage(_owner.WeaponStats.WeaponDamage);
+            var character = other.GetComponent<Character>();
+
+            if (character != null)
+            {
+                character.TakeDamage(_owner.WeaponStats.WeaponDamage);
+                CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
+            }
+            
 
             if (!hasCollided)
             {

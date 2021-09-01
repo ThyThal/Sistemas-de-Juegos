@@ -9,11 +9,16 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyDummy;
     [SerializeField] private Transform _enemyPlataforms;
+    [SerializeField] private Transform _middlePlatform;
     [SerializeField] private Transform[] _enemySpawns;
     [SerializeField] private GameObject[] _tutorialWindows;
     [SerializeField] private int _tutorialIndex;
     [SerializeField] private Color _colorComplete;
     [SerializeField] private int _pressedKeys;
+    [SerializeField] private int _killedTutorialAmount = 0;
+    [SerializeField] private bool _killedEnemies;
+    [SerializeField] public int _grabbedItem;
+    [SerializeField] private bool _finishedRewards = false;
 
     [Header("Completed Tutorials")]
     [SerializeField] private bool _movementTutorialFinished = false;
@@ -25,13 +30,15 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private bool _left = false;
     [SerializeField] private bool _right = false;
     [SerializeField] private bool _attack = false;
-
+    [SerializeField] private bool _loot = false;
 
     [Header("Tutorial Movement Letters")]
     [SerializeField] private Image _upLetter;
     [SerializeField] private Image _downLetter;
     [SerializeField] private Image _leftLetter;
     [SerializeField] private Image _rightLetter;
+    [SerializeField] private Image _lootLetter;
+    [SerializeField] private Image _lootDescription;
 
     [Header("Tutorial Movement Arrows")]
     [SerializeField] private Image _upArrow;
@@ -42,6 +49,14 @@ public class TutorialManager : MonoBehaviour
     [Header("Tutorial Attack")]
     [SerializeField] private Image _attackKeyboard;
     [SerializeField] private Image _attackMouse;
+
+    [Header("Tutorial Rewards")]
+    [SerializeField] private GameObject _oldWall;
+    [SerializeField] private GameObject _newWall;
+    [SerializeField] private GameObject _rewardEpic;
+    [SerializeField] private Transform _rewardEpicPlatform;
+    [SerializeField] private GameObject _rewardRare;
+    [SerializeField] private Transform _rewardRarePlatform;
 
     private void Start()
     {
@@ -61,6 +76,18 @@ public class TutorialManager : MonoBehaviour
             {
                 _tutorialWindows[i].SetActive(false);
             }
+        }
+
+        if (_killedTutorialAmount >= 3 && !_killedEnemies)
+        {
+            _killedEnemies = true;
+            _tutorialIndex++;
+            StartCoroutine(TutorialStartRewards());
+        }
+
+        if (_killedTutorialAmount >= 2 && _attackTutorialFinished && _loot && _tutorialIndex == 2)
+        {
+            TutorialFinishLooting();
         }
     }
 
@@ -165,8 +192,83 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _tutorialWindows[_tutorialIndex].GetComponent<Animator>()?.SetTrigger("Finished");
             yield return new WaitForSeconds(1f);
-
-            _tutorialIndex++;
         }
     }
+
+    private IEnumerator TutorialStartRewards()
+    {
+        _killedTutorialAmount = 0;
+
+        // Remove Middle Platform
+        //_middlePlatform.DOMove(new Vector3(_middlePlatform.transform.position.x, -1, _middlePlatform.transform.position.z), 2);
+        yield return new WaitForSeconds(1f);
+        _rewardEpic.SetActive(true);
+        _rewardRare.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        // Spawn Rewards
+        _rewardEpicPlatform.gameObject.SetActive(true);
+        _rewardEpicPlatform.DOMove(new Vector3(_rewardEpicPlatform.transform.position.x, 0, _rewardEpicPlatform.transform.position.z), 1);
+        _rewardRarePlatform.gameObject.SetActive(true);
+        _rewardRarePlatform.DOMove(new Vector3(_rewardRarePlatform.transform.position.x, 0, _rewardRarePlatform.transform.position.z), 1);
+        yield return new WaitForSeconds(1.5f);
+
+
+        _newWall.SetActive(true);
+        _oldWall.SetActive(false);
+    }
+
+    public void AddTutorialKilled()
+    {
+        _killedTutorialAmount++;
+    }
+
+    public void TutorialReadLootingInput(InputAction.CallbackContext value)
+    {
+        if ((value.control.name == "e") && !_loot && _tutorialIndex == 2)
+        {
+            if (_grabbedItem == 1)
+            {
+                _loot = true;
+                _lootLetter.color = _colorComplete;
+                _lootDescription.color = _colorComplete;
+                StartCoroutine(TutorialDelayLoot());
+                StartCoroutine(SpawnRewardEnemy());
+                _pressedKeys++;
+            }
+        }
+
+        if (_pressedKeys >= 6 && _grabbedItem == 2 && _finishedRewards == false)
+        {
+            _finishedRewards = true;
+            StartCoroutine(SpawnRewardEnemy());
+        }
+    }
+
+
+    private IEnumerator TutorialDelayLoot()
+    {
+        yield return new WaitForSeconds(1f);
+        _tutorialWindows[_tutorialIndex].GetComponent<Animator>()?.SetTrigger("Finished");
+    }
+    private void TutorialFinishLooting()
+    {
+        _finishedRewards = true;
+
+        if (_killedTutorialAmount >= 2 && _finishedRewards == true)
+        {
+            _tutorialIndex++;
+            Debug.Log("Finished Tutorial!");
+        }
+
+    }
+
+    private IEnumerator SpawnRewardEnemy()
+    {
+        var dummy = Instantiate(_enemyDummy, _enemySpawns[0]);
+        dummy.transform.SetParent(_enemySpawns[0]);
+        dummy.transform.LookAt(GameManager.Instance.Player.transform);
+        yield return new WaitForSeconds(1f);
+    }
 }
+

@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f07759d7f0e75a4886f2a0c1a9093a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reward: {fileID: 3036464835554209826, guid: 135a64a27cb387d459e30e15fc0e08ef, type: 3}
-  _lootRadius: {fileID: 0}
+  _reward: {fileID: 6881158075020286458, guid: 20af8e3d46e5f9e4c98802db779421f1, type: 3}
+  _weapon: {fileID: 0}
+  _lootRarityRadius: {fileID: 0}
+  _lootRarityBeam: {fileID: 0}
   _isPlayerClose: 0
 --- !u!135 &8481033051111663034
 SphereCollider:

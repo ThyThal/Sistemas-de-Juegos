@@ -5,19 +5,24 @@ using UnityEngine;
 public class LootableReward : MonoBehaviour, ILootable
 {
     [SerializeField] private GameObject _reward;
+    [SerializeField] private Weapon _weapon;
     [SerializeField] private GameObject _lootRarityRadius;
     [SerializeField] private GameObject _lootRarityBeam;
     [SerializeField] private bool _isPlayerClose;
     private GameObject _spawned;
 
+    public GameObject Reward => _reward;
+    public Weapon Weapon => _weapon;
+
     private void Start()
     {
         if (_reward != null)
         {
+            _weapon = _reward.GetComponent<Weapon>();
             _spawned = Instantiate(_reward, transform.position, Quaternion.identity);
             _spawned.transform.SetParent(transform);
-            _lootRarityBeam = Instantiate(_reward.GetComponent<Weapon>().WeaponStats.RarityBeam, transform);
-            _lootRarityRadius = Instantiate(_reward.GetComponent<Weapon>().WeaponStats.RarityRadius, transform);
+            _lootRarityBeam = Instantiate(_weapon.WeaponStats.RarityBeam, transform);
+            _lootRarityRadius = Instantiate(_weapon.WeaponStats.RarityRadius, transform);
         }
     }
 
@@ -27,6 +32,8 @@ public class LootableReward : MonoBehaviour, ILootable
 
         if (_isPlayerClose == true)
         {
+            GameManager.Instance.TutorialManager._grabbedItem++;
+
             if (player.PlayerInventory.CurrentWeapon != null)
             {
                 player.PlayerInventory.RemoveWeapon();
@@ -35,6 +42,8 @@ public class LootableReward : MonoBehaviour, ILootable
             player.PlayerInventory.LootWeapons(_spawned);
             _lootRarityBeam.GetComponent<ParticleSystem>()?.Stop();
             _lootRarityRadius.GetComponent<ParticleSystem>()?.Stop();
+            _weapon = null;
+            _reward = null;
             //Destroy(this.gameObject);
         }
     }

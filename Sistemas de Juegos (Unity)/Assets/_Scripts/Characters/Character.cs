@@ -13,6 +13,7 @@ public class Character : MonoBehaviour, IDamagable
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [SerializeField] private SphereCollider _collider;
 
+    [SerializeField] private bool isTutorial;
     float CurrentLife => _currentLife;
 
 
@@ -52,6 +53,10 @@ public class Character : MonoBehaviour, IDamagable
     private IEnumerator WaitForDie()
     {
         yield return new WaitForSeconds(1f);
+        if (isTutorial)
+        {
+            GameManager.Instance.TutorialManager.AddTutorialKilled();
+        }
         Destroy(this.gameObject);
     }
 }

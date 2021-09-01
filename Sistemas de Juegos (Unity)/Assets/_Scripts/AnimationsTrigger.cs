@@ -8,7 +8,6 @@ public class AnimationsTrigger : MonoBehaviour
 
     public void TriggerAttack()
     {
-        Debug.Log("Debug Animation Attack");
         if (_playerInventory.CurrentWeapon != null)
         {
             _playerInventory.CurrentWeapon.WeaponAttack();
