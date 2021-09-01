@@ -1007,10 +1007,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lootable Reward (Epic)
       objectReference: {fileID: 0}
-    - target: {fileID: 8103524530339336194, guid: 27946158d4f5b5c43961cab5db64a292, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8103524530339336195, guid: 27946158d4f5b5c43961cab5db64a292, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -7386,7 +7382,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6d2b0f01b36cc794486d7ebb79b929ec, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -19632,36 +19628,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8103524530339336194, guid: 27946158d4f5b5c43961cab5db64a292, type: 3}
   m_PrefabInstance: {fileID: 139584552}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1394253167 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8103524530339336192, guid: 27946158d4f5b5c43961cab5db64a292, type: 3}
-  m_PrefabInstance: {fileID: 139584552}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394253165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f07759d7f0e75a4886f2a0c1a9093a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1394253168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394253165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f10c9cd796a5c746a9e6fffc3915f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reward: {fileID: 1394253167}
-  _weapon: {fileID: 0}
-  _header: 
-  _rarity: 
-  _description: 
-  _damage: 
-  _speed: 
 --- !u!1 &1408983462
 GameObject:
   m_ObjectHideFlags: 0
@@ -23867,10 +23833,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 18786414, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 694110891150402756, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 3255817137169312536, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
+      propertyPath: _shootCooldown
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4878399600339527279, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -23931,6 +23905,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1554401136, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}

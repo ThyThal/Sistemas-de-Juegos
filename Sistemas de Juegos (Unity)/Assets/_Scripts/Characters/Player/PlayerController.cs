@@ -12,18 +12,33 @@ public class PlayerController : Character, IPlayerInput
     [SerializeField] private PlayerAnimations _playerAnimations;
     [SerializeField] private Transform _shootPoint;
 
-    private float _movementSmoothingSpeed = 1f;
+    private float _movementSmoothingSpeed = 0.75f;
+    private float _shootCooldownOG;
+    [SerializeField] private bool _isAttacking = false;
+
+    [SerializeField] private float _shootCooldown = 1f;
     [SerializeField] private LootableReward _lootable;
     [SerializeField] private Vector3 _rawInputMovement;
     [SerializeField] private Vector3 _smoothInputMovement;
+    [SerializeField] private AudioClip[] _attackClips;
+    [SerializeField] private AudioSource _attackSource;
 
     public Transform ShootPoint => _shootPoint;
     public PlayerInventory PlayerInventory => _playerInventory;
     public LootableReward LootableReward => _lootable;
 
+
     // MonoBehaviours
+    private void Start()
+    {
+        _shootCooldownOG = _shootCooldown;
+    }
+
     private void Update()
     {
+        if (_shootCooldown > 0) { _shootCooldown -= Time.deltaTime; } // Shoot Cooldown
+        if (_shootCooldown <= 0) { _isAttacking = false; }
+        
         //_shootPoint.localRotation = transform.localRotation;
 
         UpdatePlayerMovement();
@@ -62,8 +77,11 @@ public class PlayerController : Character, IPlayerInput
 
     public void OnAttack(InputAction.CallbackContext value)
     {
-        if (value.started)
+        if (value.started && _shootCooldown <= 0)
         {
+            _isAttacking = true;
+            _shootCooldown = _shootCooldownOG;
+            _attackSource.PlayOneShot(_attackClips[Random.Range(0, _attackClips.Length)]);
             _playerAnimations.PlayAttackAnimation();
         }
     }

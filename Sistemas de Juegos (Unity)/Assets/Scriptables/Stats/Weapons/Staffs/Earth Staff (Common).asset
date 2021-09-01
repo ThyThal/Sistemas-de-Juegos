@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Earth Staff (Common)
   m_EditorClassIdentifier: 
   _weaponName: Earth Staff (Common)
+  _weaponRarity: Weapon Rarity
+  _weaponDescription: Weapon Description
   _weaponSpellPrefab: {fileID: 6501817363121866371, guid: f86f85e5374f2db41bdac91175bdec88, type: 3}
   _rarityRadius: {fileID: 0}
   _rarityBeam: {fileID: 0}

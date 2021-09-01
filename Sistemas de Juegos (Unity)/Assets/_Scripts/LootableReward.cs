@@ -8,6 +8,8 @@ public class LootableReward : MonoBehaviour, ILootable
     [SerializeField] private Weapon _weapon;
     [SerializeField] private GameObject _lootRarityRadius;
     [SerializeField] private GameObject _lootRarityBeam;
+    [SerializeField] private AudioClip[] _pickupClips;
+    [SerializeField] private AudioSource _pickupSource;
     [SerializeField] private bool _isPlayerClose;
     private GameObject _spawned;
 
@@ -33,6 +35,7 @@ public class LootableReward : MonoBehaviour, ILootable
         if (_isPlayerClose == true)
         {
             GameManager.Instance.TutorialManager._grabbedItem++;
+            _pickupSource.PlayOneShot(_pickupClips[Random.Range(0, _pickupClips.Length)]);
 
             if (player.PlayerInventory.CurrentWeapon != null)
             {

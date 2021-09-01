@@ -241,7 +241,11 @@ public class TutorialManager : MonoBehaviour
         if (_pressedKeys >= 6 && _grabbedItem == 2 && _finishedRewards == false)
         {
             _finishedRewards = true;
-            StartCoroutine(SpawnRewardEnemy());
+            if (_killedTutorialAmount >= 1)
+            {
+                _killedTutorialAmount++;
+                StartCoroutine(SpawnRewardEnemy());
+            }
         }
     }
 
