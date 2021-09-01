@@ -32,9 +32,9 @@ public class LootableReward : MonoBehaviour, ILootable
     {
         PlayerController player = GameManager.Instance.Player;
 
-        if (_isPlayerClose == true)
+        if (_isPlayerClose == true && _reward != null)
         {
-            GameManager.Instance.TutorialManager._grabbedItem++;
+            GameManager.Instance.TutorialManager.TutorialLoot.AddGrabbed();
             _pickupSource.PlayOneShot(_pickupClips[Random.Range(0, _pickupClips.Length)]);
 
             if (player.PlayerInventory.CurrentWeapon != null)

@@ -48,7 +48,7 @@ public class @PlayerGameInput : IInputActionCollection, IDisposable
                     ""id"": ""c97e2355-14e6-4de8-bd6a-524a649d7947"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -67,7 +67,7 @@ public class @PlayerGameInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""090c5875-e1f9-4f55-b765-133bc8162e8d"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Attack"",
@@ -199,7 +199,7 @@ public class @PlayerGameInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""eba9a1f5-f3fc-456d-8561-8cc604e8d63d"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Loot"",

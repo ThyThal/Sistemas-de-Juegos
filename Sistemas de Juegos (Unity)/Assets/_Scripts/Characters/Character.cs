@@ -55,7 +55,15 @@ public class Character : MonoBehaviour, IDamagable
         yield return new WaitForSeconds(1f);
         if (isTutorial)
         {
-            GameManager.Instance.TutorialManager.AddTutorialKilled();
+            if (GameManager.Instance.TutorialManager.CurrentIndex == 1)
+            {
+                GameManager.Instance.TutorialManager.TutorialAttack.TutorialAddKill();
+            }
+
+            if (GameManager.Instance.TutorialManager.CurrentIndex == 2)
+            {
+                GameManager.Instance.TutorialManager.TutorialLoot.TutorialAddKill();
+            }
         }
         Destroy(this.gameObject);
     }

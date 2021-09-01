@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSpeed = 0.1f;
 
     //Stored Values
-    private Vector3 movementDirection;
+    [SerializeField] private Vector3 movementDirection;
+    [SerializeField] private Vector3 movementDebug;
+    [SerializeField] public bool isAttacking;
 
 
     public void SetupBehaviour()
@@ -38,14 +40,24 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        MoveThePlayer();
+        if (isAttacking == false)
+        {
+            MoveThePlayer();
+        }
+
+        else
+        {
+            movementDebug = Vector3.zero;
+        }
+
         AimTowardsMouse();
         //TurnThePlayer();
     }
 
     void MoveThePlayer()
     {
-        Vector3 movement = CameraDirection(movementDirection) * movementSpeed * Time.deltaTime;
+        var movement = CameraDirection(movementDirection) * movementSpeed * Time.deltaTime;
+        movementDebug = movement;
 
         // Animator
 

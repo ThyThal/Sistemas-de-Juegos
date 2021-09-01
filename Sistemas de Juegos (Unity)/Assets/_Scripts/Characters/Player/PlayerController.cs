@@ -37,12 +37,16 @@ public class PlayerController : Character, IPlayerInput
     private void Update()
     {
         if (_shootCooldown > 0) { _shootCooldown -= Time.deltaTime; } // Shoot Cooldown
-        if (_shootCooldown <= 0) { _isAttacking = false; }
+        if (_shootCooldown <= 0) { _isAttacking = false; _playerMovement.isAttacking = false; }
         
         //_shootPoint.localRotation = transform.localRotation;
 
-        UpdatePlayerMovement();
-        UpdatePlayerAnimations();
+        if (_isAttacking == false)
+        {
+            UpdatePlayerMovement();
+            UpdatePlayerAnimations();
+        }
+
     }
 
     // Methods
@@ -80,6 +84,7 @@ public class PlayerController : Character, IPlayerInput
         if (value.started && _shootCooldown <= 0)
         {
             _isAttacking = true;
+            _playerMovement.isAttacking = true;
             _shootCooldown = _shootCooldownOG;
             _attackSource.PlayOneShot(_attackClips[Random.Range(0, _attackClips.Length)]);
             _playerAnimations.PlayAttackAnimation();

@@ -96,3 +96,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 0}
   _weaponStats: {fileID: 11400000, guid: d2c47b0e36d328345845e241b261f736, type: 2}
+  _isEquipped: 0
