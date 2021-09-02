@@ -9,24 +9,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Transform _wandHolder;
 
     [Header("Player Information")]
-    [SerializeField] private GameObject _defaultWeapon;
     [SerializeField] private Weapon _currentWeapon;
 
-
     public Weapon CurrentWeapon => _currentWeapon;
-    private void Start()
-    {
-        if (_defaultWeapon != null)
-        {
-            var weapon = Instantiate(_defaultWeapon, transform.position, transform.rotation);
-            weapon.GetComponent<Weapon>().Equip();
-            _currentWeapon = weapon.GetComponent<Weapon>();
-            weapon.transform.SetParent(_staffHolder);
-            weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.localRotation = Quaternion.identity;
-            weapon.transform.localScale = Vector3.one;
-        }
-    }
 
     public void LootWeapons(GameObject weapon)
     {

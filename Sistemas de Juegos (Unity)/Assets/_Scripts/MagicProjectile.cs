@@ -43,7 +43,7 @@ public class MagicProjectile : MonoBehaviour, IProjectile
     {
         if ((_targetLayers & 1 << other.gameObject.layer) != 0)
         {
-            var character = other.GetComponent<Character>();
+            var character = other.GetComponent<Enemy>();
 
             if (character != null)
             {
@@ -91,6 +91,10 @@ public class MagicProjectile : MonoBehaviour, IProjectile
 
     public void Travel()
     {
+        if (transform.position == Vector3.zero)
+        {
+            Debug.Log("dsadas");
+        }
         Vector3 movement = transform.forward * _speed * Time.deltaTime;
         _myRigidbody.MovePosition(transform.position + movement);
     }

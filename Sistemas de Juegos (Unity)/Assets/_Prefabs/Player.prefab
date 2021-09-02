@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a5cacef56af8142b86d509ac8766a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInventory: {fileID: 2132606122819299078}
+  _playerInventory: {fileID: 8692587584990817755}
 --- !u!1 &7339974012635259061
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,12 +179,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4878399600339527279}
-  - component: {fileID: 3255817137169312536}
-  - component: {fileID: 694110891150402756}
   - component: {fileID: 6280477044150668942}
   - component: {fileID: 4636948513266779150}
-  - component: {fileID: 830514801}
-  - component: {fileID: 2132606122819299078}
+  - component: {fileID: 1704183475090594902}
+  - component: {fileID: 387450818}
+  - component: {fileID: 8692587584990817755}
+  - component: {fileID: 5338323595647947582}
+  - component: {fileID: 1770598443950284567}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -209,65 +210,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3255817137169312536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339974012635259061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d07e32cd43c627449dd044933f0ace5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dieParticles: {fileID: 0}
-  _maxLife: 100
-  _currentLife: 0
-  _hurtSource: {fileID: 0}
-  _hurtSounds:
-  - {fileID: 8300000, guid: ea9111a038aad4f4b96a1621eae1b7a3, type: 3}
-  - {fileID: 8300000, guid: 524197d5b488e5845a96652f994fb502, type: 3}
-  _meshRenderer: {fileID: 6324860620213875174}
-  _collider: {fileID: 0}
-  isTutorial: 0
-  _playerInventory: {fileID: 2132606122819299078}
-  _playerMovement: {fileID: 694110891150402756}
-  _playerAnimations: {fileID: 830514801}
-  _shootPoint: {fileID: 4226436677351025011}
-  _isAttacking: 0
-  _shootCooldown: 0.75
-  _lootable: {fileID: 0}
-  _rawInputMovement: {x: 0, y: 0, z: 0}
-  _smoothInputMovement: {x: 0, y: 0, z: 0}
-  _attackClips:
-  - {fileID: 8300000, guid: fa8ffe678ed19aa4f96494ea6aac7c25, type: 3}
-  - {fileID: 8300000, guid: 650f2a6f7f44a89479c9b895ea8434f2, type: 3}
-  - {fileID: 8300000, guid: 99a7f8d2c753e9049a596c6aeb5f4889, type: 3}
-  - {fileID: 8300000, guid: 2d290fc0e9a145d4e9b7ea708a277054, type: 3}
-  _attackSource: {fileID: 18786414}
---- !u!114 &694110891150402756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339974012635259061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef02122e0dd2e049b621d471230da0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRigidbody: {fileID: 4636948513266779150}
-  mainCamera: {fileID: 0}
-  _mouseAimLayers:
-    serializedVersion: 2
-    m_Bits: 65600
-  movementSpeed: 5
-  turnSpeed: 0.1
-  movementDirection: {x: 0, y: 0, z: 0}
-  movementDebug: {x: 0, y: 0, z: 0}
-  isAttacking: 0
 --- !u!114 &6280477044150668942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,21 +237,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3255817137169312536}
+      - m_Target: {fileID: 1704183475090594902}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialAttack, Assembly-CSharp
-        m_MethodName: OnAttackTutorial
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -323,21 +253,9 @@ MonoBehaviour:
     m_ActionName: Player/Shoot[/Mouse/leftButton,/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3255817137169312536}
+      - m_Target: {fileID: 1704183475090594902}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnMovement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialMovement, Assembly-CSharp
-        m_MethodName: OnMovementTutorial
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -355,21 +273,9 @@ MonoBehaviour:
     m_ActionName: Player/Mouse Position[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3255817137169312536}
+      - m_Target: {fileID: 1704183475090594902}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnLoot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
-        m_MethodName: TutorialReadLootingInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -402,7 +308,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &830514801
+--- !u!114 &1704183475090594902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,12 +317,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 7339974012635259061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29946cb05c19f79428752be13c8ac9d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d07e32cd43c627449dd044933f0ace5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 6324860620218142498}
-  _playerInventory: {fileID: 2132606122819299078}
---- !u!114 &2132606122819299078
+  _characterAudio: {fileID: 5338323595647947582}
+  _defaultWeapon: {fileID: 9076263409922731493, guid: e1334a7727b53a046bc11d8f1902b6a3, type: 3}
+  _playerInventory: {fileID: 8692587584990817755}
+  _playerMovement: {fileID: 387450818}
+  _playerAnimations: {fileID: 1770598443950284567}
+  _shootingPoint: {fileID: 4226436677351025011}
+  _shootCooldown: 1
+  _isAttacking: 0
+  _rawInputMovement: {x: 0, y: 0, z: 0}
+  _lootableReward: {fileID: 0}
+--- !u!114 &387450818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339974012635259061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef02122e0dd2e049b621d471230da0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRigidbody: {fileID: 4636948513266779150}
+  _mainCamera: {fileID: 0}
+  _mouseAimLayers:
+    serializedVersion: 2
+    m_Bits: 67136
+  movementSpeed: 3
+  turnSpeed: 0.1
+  movementDirection: {x: 0, y: 0, z: 0}
+  movementDebug: {x: 0, y: 0, z: 0}
+  isAttacking: 0
+--- !u!114 &8692587584990817755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,8 +366,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _staffHolder: {fileID: 806875939946656402}
   _wandHolder: {fileID: 4600665769778564340}
-  _defaultWeapon: {fileID: 9076263409922731493, guid: e1334a7727b53a046bc11d8f1902b6a3, type: 3}
   _currentWeapon: {fileID: 0}
+--- !u!114 &5338323595647947582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339974012635259061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774d350705a0b8a4986fcbbffe0959ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAudioIdle:
+    _audioSource: {fileID: 0}
+    _audioClips: []
+  _characterAudioAttack:
+    _audioSource: {fileID: 0}
+    _audioClips: []
+  _characterAudioWalk:
+    _audioSource: {fileID: 0}
+    _audioClips: []
+  _characterAudioHurt:
+    _audioSource: {fileID: 0}
+    _audioClips: []
+--- !u!114 &1770598443950284567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339974012635259061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29946cb05c19f79428752be13c8ac9d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6324860620218142498}
+  _playerInventory: {fileID: 8692587584990817755}
 --- !u!1 &8205950333677424216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,11 +2176,6 @@ Transform:
 --- !u!95 &6324860620218142498 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2066896392029128874, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-  m_PrefabInstance: {fileID: 5434011213322995592}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &6324860620213875174 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2066896392024962670, guid: 45288819fde2143449a96207b14db0bb, type: 3}
   m_PrefabInstance: {fileID: 5434011213322995592}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6324860620208562510 stripped

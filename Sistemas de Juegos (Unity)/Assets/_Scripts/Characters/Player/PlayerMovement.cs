@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Component References")]
-    [SerializeField] private Rigidbody playerRigidbody;
-    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Rigidbody _playerRigidbody;
+    [SerializeField] private Camera _mainCamera;
 
     [Header("Other Settings")]
     [SerializeField] private LayerMask _mouseAimLayers;
@@ -22,15 +22,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 movementDebug;
     [SerializeField] public bool isAttacking;
 
-
-    public void SetupBehaviour()
+    private void Awake()
     {
-        SetGameplayCamera();
-    }
-
-    void SetGameplayCamera()
-    {
-        //mainCamera = CameraManager.Instance.GetGameplayCamera();
+        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     public void UpdateMovementData(Vector3 newMovementDirection)
@@ -61,12 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
         // Animator
 
-        playerRigidbody.MovePosition(transform.position + movement);
+        _playerRigidbody.MovePosition(transform.position + movement);
     }
 
     void AimTowardsMouse()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _mouseAimLayers))
         {
@@ -82,11 +76,11 @@ public class PlayerMovement : MonoBehaviour
         if (movementDirection.sqrMagnitude > 0.01f)
         {
 
-            Quaternion rotation = Quaternion.Slerp(playerRigidbody.rotation,
+            Quaternion rotation = Quaternion.Slerp(_playerRigidbody.rotation,
                                                  Quaternion.LookRotation(CameraDirection(movementDirection)),
                                                  turnSpeed);
 
-            playerRigidbody.MoveRotation(rotation);
+            _playerRigidbody.MoveRotation(rotation);
 
         }
     }
@@ -94,8 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 CameraDirection(Vector3 movementDirection)
     {
-        var cameraForward = mainCamera.transform.forward;
-        var cameraRight = mainCamera.transform.right;
+        var cameraForward = _mainCamera.transform.forward;
+        var cameraRight = _mainCamera.transform.right;
 
         cameraForward.y = 0f;
         cameraRight.y = 0f;

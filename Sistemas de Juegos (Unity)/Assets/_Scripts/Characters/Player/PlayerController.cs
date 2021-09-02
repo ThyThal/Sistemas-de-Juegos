@@ -2,35 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
-public class PlayerController : Character, IPlayerInput
+public class PlayerController : Character
 {
-    [Header("Controllers")]
+    [Header("Player Components")]
+    [SerializeField] private GameObject _defaultWeapon;
     [SerializeField] private PlayerInventory _playerInventory;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerAnimations _playerAnimations;
-    [SerializeField] private Transform _shootPoint;
 
-    private float _movementSmoothingSpeed = 0.75f;
-    private float _shootCooldownOG;
-    [SerializeField] private bool _isAttacking = false;
-
+    [Header("Shooting Information")]
+    [SerializeField] private Transform _shootingPoint;
     [SerializeField] private float _shootCooldown = 1f;
-    [SerializeField] private LootableReward _lootable;
+    [SerializeField] private bool _isAttacking = false;
+    private float _shootCooldownOG;
+
+    [Header("Movement Information")]
     [SerializeField] private Vector3 _rawInputMovement;
-    [SerializeField] private Vector3 _smoothInputMovement;
-    [SerializeField] private AudioClip[] _attackClips;
-    [SerializeField] private AudioSource _attackSource;
 
-    public Transform ShootPoint => _shootPoint;
+    [Header("Lootable Rewards")]
+    [SerializeField] private LootableReward _lootableReward;
+
+
+    //======================[ PROPERTIES ]======================\\
+
+    // Player Components.
     public PlayerInventory PlayerInventory => _playerInventory;
-    public LootableReward LootableReward => _lootable;
 
+    // Shooting Information.
+    public Transform ShootingPoint => _shootingPoint;
 
-    // MonoBehaviours
+    //======================[ UNITY MONO BEHAVIOURS ]======================\\
     private void Start()
     {
+        if (_defaultWeapon != null)
+        {
+            var defaultWeapon = Instantiate(_defaultWeapon, transform);
+            _playerInventory.LootWeapons(defaultWeapon);
+        }
+
         _shootCooldownOG = _shootCooldown;
     }
 
@@ -38,7 +48,7 @@ public class PlayerController : Character, IPlayerInput
     {
         if (_shootCooldown > 0) { _shootCooldown -= Time.deltaTime; } // Shoot Cooldown
         if (_shootCooldown <= 0) { _isAttacking = false; _playerMovement.isAttacking = false; }
-        
+
         //_shootPoint.localRotation = transform.localRotation;
 
         if (_isAttacking == false)
@@ -49,11 +59,20 @@ public class PlayerController : Character, IPlayerInput
 
     }
 
-    // Methods
+
+    //======================[ METHODS ]======================\\
+    public void AddReward(LootableReward reward)
+    {
+        _lootableReward = reward;
+    }
+
+    public void RemoveReward()
+    {
+        _lootableReward = null;
+    }
+
     private void UpdatePlayerMovement()
     {
-        // Disable Smooth Movement.
-        //_smoothInputMovement = Vector3.Lerp(_smoothInputMovement, _rawInputMovement, Time.deltaTime * _movementSmoothingSpeed);
         _playerMovement.UpdateMovementData(_rawInputMovement);
     }
 
@@ -62,17 +81,7 @@ public class PlayerController : Character, IPlayerInput
         _playerAnimations.UpdateMovementAnimation(_rawInputMovement.magnitude);
     }
 
-    public void AddReward(LootableReward reward)
-    {
-        _lootable = reward;
-    }
-
-    public void RemoveReward()
-    {
-        _lootable = null;
-    }
-
-    // IPlayerInput System Events
+    //======================[ PLAYER INPUT AVTIONS ]======================\\
     public void OnMovement(InputAction.CallbackContext value)
     {
         Vector2 inputMovement = value.ReadValue<Vector2>();
@@ -86,7 +95,7 @@ public class PlayerController : Character, IPlayerInput
             _isAttacking = true;
             _playerMovement.isAttacking = true;
             _shootCooldown = _shootCooldownOG;
-            _attackSource.PlayOneShot(_attackClips[Random.Range(0, _attackClips.Length)]);
+            //_attackSource.PlayOneShot(_attackClips[Random.Range(0, _attackClips.Length)]);
             _playerAnimations.PlayAttackAnimation();
         }
     }
@@ -95,9 +104,9 @@ public class PlayerController : Character, IPlayerInput
     {
         if (value.started)
         {
-            if (_lootable != null)
+            if (_lootableReward != null)
             {
-                _lootable.GrabLootable();
+                _lootableReward.GrabLootable();
             }
         }
     }

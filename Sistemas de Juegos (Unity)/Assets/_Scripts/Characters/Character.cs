@@ -4,67 +4,46 @@ using UnityEngine;
 
 public class Character : MonoBehaviour, IDamagable
 {
+    [Header("Character Components")]
     [SerializeField] private GameObject _dieParticles;
-    [SerializeField] private float _maxLife = 100f;
-    [SerializeField] private float _currentLife;
-    [SerializeField] private AudioSource _hurtSource;
-    [SerializeField] private List<AudioClip> _hurtSounds;
+    [SerializeField] private CharacterAudio _characterAudio;
 
-    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
-    [SerializeField] private SphereCollider _collider;
+    [Header("Character Stats")]
+    [SerializeField] private float _maxLife;
+    [SerializeField] private float _currentHealth;
 
-    [SerializeField] private bool isTutorial;
-    float CurrentLife => _currentLife;
+    //==================== Properties ====================\\
 
+    // Variables
+    public float CurrentHealth => _currentHealth;
 
-    private void Start()
-    {
-        //_collider = GetComponent<SphereCollider>();
-        //_meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _currentLife = _maxLife;
-    }
-
-
+    //==================== IDamagable ====================\\
     public void TakeDamage(float damage)
     {
-        _currentLife -= damage;
-        _hurtSource.PlayOneShot(_hurtSounds[Random.Range(0, _hurtSounds.Count)]);
+        _currentHealth -= damage;
+        //_characterAudioHurt.PlayAudio();
 
-        if (_currentLife <= 0)
-        {
-            CharacterDie();
-        }
+        if (CurrentHealth <= 0) { Die(); }
     }
-
-    private void CharacterDie()
+    public void Heal(float amount)
     {
-        _dieParticles = Instantiate(_dieParticles, transform.position, Quaternion.identity) as GameObject;
+        _currentHealth = Mathf.Clamp(amount, 0, _maxLife);
+    }
+    public void Die()
+    {
+        _dieParticles = Instantiate(_dieParticles, transform.position, Quaternion.identity);
         Destroy(_dieParticles, 2f);
-        Disable();
-        StartCoroutine(WaitForDie());
+        this.gameObject.SetActive(false);
+    }
+    public void Revive()
+    {
+        Heal(_currentHealth * 0.25f);
+        this.gameObject.SetActive(false);
     }
 
-
-    private void Disable()
+    public void CharacterData(int health)
     {
-        _collider.enabled = false;
-        _meshRenderer.enabled = false;
-    }
-    private IEnumerator WaitForDie()
-    {
-        yield return new WaitForSeconds(1f);
-        if (isTutorial)
-        {
-            if (GameManager.Instance.TutorialManager.CurrentIndex == 1)
-            {
-                GameManager.Instance.TutorialManager.TutorialAttack.TutorialAddKill();
-            }
-
-            if (GameManager.Instance.TutorialManager.CurrentIndex == 2)
-            {
-                GameManager.Instance.TutorialManager.TutorialLoot.TutorialAddKill();
-            }
-        }
-        Destroy(this.gameObject);
+        _maxLife = health;
+        Heal(health);
     }
 }

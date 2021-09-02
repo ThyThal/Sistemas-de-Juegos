@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour, IEquipable, IWeapon
     public void Equip()
     {
         _isEquipped = true;
-        _shootPoint = GameManager.Instance.Player.ShootPoint;
+        _shootPoint = GameManager.Instance.Player.ShootingPoint;
     }
 
     public void Unequip()

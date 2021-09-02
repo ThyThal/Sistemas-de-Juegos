@@ -8,6 +8,7 @@ public class Staff : Weapon
     public override void WeaponAttack()
     {
         GameObject spell = Instantiate(WeaponStats.WeaponSpellPrefab, ShootPoint.transform.position, ShootPoint.transform.rotation);
+        //spell.transform.SetParent(transform);
         spell.GetComponent<MagicProjectile>().SetOwner(this);
     }
 }
