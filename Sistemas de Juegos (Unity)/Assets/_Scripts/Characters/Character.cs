@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using EZCameraShake;
 
 public class Character : MonoBehaviour, IDamagable
 {
     [Header("Character Components")]
+    [SerializeField] private bool isPlayer;
     [SerializeField] private GameObject _dieParticles;
     [SerializeField] private CharacterAudio _characterAudio;
+    [SerializeField] private UnityEvent _triggerDieEvent;
 
     [Header("Character Stats")]
     [SerializeField] private float _maxLife;
@@ -23,7 +27,8 @@ public class Character : MonoBehaviour, IDamagable
         _currentHealth -= damage;
         //_characterAudioHurt.PlayAudio();
 
-        if (CurrentHealth <= 0) { Die(); }
+        if (isPlayer) {CameraShaker.Instance.ShakeOnce(5f, 4f, 0.1f, 1f); }
+        if (CurrentHealth <= 0) { Die(); _triggerDieEvent.Invoke(); }
     }
     public void Heal(float amount)
     {
@@ -33,8 +38,9 @@ public class Character : MonoBehaviour, IDamagable
     {
         _dieParticles = Instantiate(_dieParticles, transform.position, Quaternion.identity);
         Destroy(_dieParticles, 2f);
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
+
     public void Revive()
     {
         Heal(_currentHealth * 0.25f);

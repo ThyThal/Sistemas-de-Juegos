@@ -35,6 +35,8 @@ public class PlayerController : Character
     //======================[ UNITY MONO BEHAVIOURS ]======================\\
     private void Start()
     {
+        Heal(float.PositiveInfinity);
+
         if (_defaultWeapon != null)
         {
             var defaultWeapon = Instantiate(_defaultWeapon, transform);

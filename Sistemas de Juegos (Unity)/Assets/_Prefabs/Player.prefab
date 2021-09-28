@@ -320,7 +320,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07e32cd43c627449dd044933f0ace5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
+  _dieParticles: {fileID: 357777661601626983, guid: 27f8be03136494243849c66f88ffd7ff, type: 3}
   _characterAudio: {fileID: 5338323595647947582}
+  _triggerDieEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxLife: 100
+  _currentHealth: 0
   _defaultWeapon: {fileID: 9076263409922731493, guid: e1334a7727b53a046bc11d8f1902b6a3, type: 3}
   _playerInventory: {fileID: 8692587584990817755}
   _playerMovement: {fileID: 387450818}
