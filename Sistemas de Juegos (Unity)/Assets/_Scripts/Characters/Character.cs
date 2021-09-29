@@ -38,13 +38,15 @@ public class Character : MonoBehaviour, IDamagable
     {
         _dieParticles = Instantiate(_dieParticles, transform.position, Quaternion.identity);
         Destroy(_dieParticles, 2f);
+        GetComponent<Collider>().enabled = false;
         //this.gameObject.SetActive(false);
     }
 
     public void Revive()
     {
         Heal(_currentHealth * 0.25f);
-        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(true);
+        GetComponent<Collider>().enabled = false;
     }
 
     public void CharacterData(int health)

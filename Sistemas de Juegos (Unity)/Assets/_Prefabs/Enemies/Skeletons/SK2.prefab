@@ -167,7 +167,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7588924093441955796}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: TriggerDie
+        m_MethodName: TriggerAnimatorDie
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -182,14 +182,16 @@ MonoBehaviour:
   _animator: {fileID: 3334106778866637876}
   _dieAnimatorID: 0
   _enemyAgent: {fileID: 968265085}
-  _isActivated: 0
+  _isActivated: 1
   _enemyStats: {fileID: 11400000, guid: cd16ecf219857424996cf2a4dced6b8a, type: 2}
   _damage: 0
   _speed: 0
   _player: {fileID: 0}
   _playerSeekRange: 10
+  _playerMovementCooldown: 3.5
   _playerAttackRange: 4
   _attackCooldown: {x: 5, y: 11}
+  _attackTimer: 0
 --- !u!114 &6808372820854776830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +240,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
