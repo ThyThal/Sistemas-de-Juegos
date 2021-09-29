@@ -326,12 +326,13 @@ MonoBehaviour:
   _triggerDieEvent:
     m_PersistentCalls:
       m_Calls: []
-  _maxLife: 100
+  _maxLife: 200
   _currentHealth: 0
   _defaultWeapon: {fileID: 9076263409922731493, guid: e1334a7727b53a046bc11d8f1902b6a3, type: 3}
   _playerInventory: {fileID: 8692587584990817755}
   _playerMovement: {fileID: 387450818}
   _playerAnimations: {fileID: 1770598443950284567}
+  _currentProjectile: {fileID: 0}
   _shootingPoint: {fileID: 4226436677351025011}
   _shootCooldown: 1
   _isAttacking: 0

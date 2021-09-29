@@ -8,7 +8,14 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private LootableReward _lootableReward;
     [SerializeField] private Spawner<Skeleton> _skeletonSpawner = new Spawner<Skeleton>();
     [SerializeField] private List<Skeleton> _skeletonsPrefabs;
+    [SerializeField] private SphereCollider _spawnerTrigger;
+    [SerializeField] private GameObject _spawnerRangeTrigger;
 
+
+    private void Start()
+    {
+        _spawnerRangeTrigger.transform.localScale = Vector3.one * _spawnerTrigger.radius * 2;
+    }
 
     [ContextMenu("Spawn Enemies")]
     private void SpawnSkeletons()
@@ -20,4 +27,13 @@ public class EnemyManager : MonoBehaviour
             skelly.transform.position = new Vector3(skelly.transform.position.x, 0, skelly.transform.position.z);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            SpawnSkeletons();
+        }
+    }
+
 }

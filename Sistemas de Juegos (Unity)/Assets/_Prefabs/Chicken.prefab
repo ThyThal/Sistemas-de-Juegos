@@ -532,33 +532,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 820383695071572933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c6be2b432a26ac4faf54187735f2159, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ed9a9b8844633640a3a7b493cc6ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   _dieParticles: {fileID: 357777661601626983, guid: 27f8be03136494243849c66f88ffd7ff, type: 3}
-  _maxLife: 25
-  _currentLife: 0
-  _hurtSource: {fileID: -519228269516808352}
-  _hurtSounds:
-  - {fileID: 8300000, guid: 311628e275f0ffa44ae6a9121657fcd2, type: 3}
-  - {fileID: 8300000, guid: 6923b7c9d258ce64099cc2d86a01da4b, type: 3}
-  - {fileID: 8300000, guid: 99b183b5898f98c44a42408d0c4d98b0, type: 3}
-  _meshRenderer: {fileID: 760020340311686063}
-  _collider: {fileID: 3824999576123604398}
-  isTutorial: 1
+  _characterAudio: {fileID: 0}
+  _triggerDieEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3072493704563881187}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: TriggerAnimatorDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _maxLife: 100
+  _currentHealth: 0
   _animator: {fileID: 734902488076912889}
-  _idleVariationTimer: {x: 10, y: 20}
-  _idleSoundTimer: {x: 4, y: 10}
-  _idleSource: {fileID: 6636063445353593763}
-  _peckSounds:
-  - {fileID: 8300000, guid: c2ffd744579d24244aa2f861f5f97eae, type: 3}
-  - {fileID: 8300000, guid: 4abe01fb443904f41b907bf35deac946, type: 3}
-  - {fileID: 8300000, guid: 211628bf97a251749b6a54b927761135, type: 3}
-  _idleSounds:
-  - {fileID: 8300000, guid: 856d8be3ad847cd48a92b670038c673d, type: 3}
-  - {fileID: 8300000, guid: 0467e4008a2fe04448fc77dbac149a85, type: 3}
-  - {fileID: 8300000, guid: 5761bc77ea8e4604cace05b51dacd02f, type: 3}
-  _cachedAnimator: 
+  _dieAnimatorID: 0
 --- !u!82 &6636063445353593763
 AudioSource:
   m_ObjectHideFlags: 0
