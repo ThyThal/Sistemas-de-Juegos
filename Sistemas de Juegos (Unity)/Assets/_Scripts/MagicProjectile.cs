@@ -66,51 +66,62 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
             {
                 character.TakeDamage(_owner.WeaponStats.WeaponDamage);
                 CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
+                Collision();
             }
 
             else
             {
-                var spawner = other.GetComponent<BreakableObject>();
-                spawner.TakeDamage(_owner.WeaponStats.WeaponDamage);
-                CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
+                if (other.isTrigger == false)
+                {
+                    var spawner = other.GetComponent<BreakableObject>();
+                    spawner.TakeDamage(_owner.WeaponStats.WeaponDamage);
+                    CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
+                    Collision();
+                }
             }
             
 
-            if (!hasCollided)
+
+        }
+    }
+
+    private void Collision()
+    {
+        if (!hasCollided)
+        {
+            hasCollided = true;
+
+            foreach (Transform child in this.transform)
             {
-                hasCollided = true;
+                GameObject.Destroy(child.gameObject);
+            }
+            _projectileImpactParticles = Instantiate(_OGprojectileImpactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
 
-                foreach (Transform child in this.transform)
-                {
-                    GameObject.Destroy(child.gameObject);
-                }
-                _projectileImpactParticles = Instantiate(_OGprojectileImpactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+            foreach (GameObject trail in _projectileTrailParticles)
+            {
+                GameObject curTrail = transform.Find(_projectileParticles.name + "/" + trail.name).gameObject;
+                curTrail.transform.parent = null;
+                Destroy(curTrail, 3f);
+            }
+            Destroy(_projectileParticles, 3f);
+            Destroy(_projectileImpactParticles, 5f);
+            Reset();
+            //projectileParticle.Stop();
 
-                foreach (GameObject trail in _projectileTrailParticles)
-                {
-                    GameObject curTrail = transform.Find(_projectileParticles.name + "/" + trail.name).gameObject;
-                    curTrail.transform.parent = null;
-                    Destroy(curTrail, 3f);
-                }
-                Destroy(_projectileParticles, 3f);
-                Destroy(_projectileImpactParticles, 5f);
-                Reset();
-                //projectileParticle.Stop();
+            ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
+            //Component at [0] is that of the parent i.e. this object (if there is any)
+            for (int i = 1; i < trails.Length; i++)
+            {
+                ParticleSystem trail = trails[i];
+                if (!trail.gameObject.name.Contains("Trail"))
+                    continue;
 
-                ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
-                //Component at [0] is that of the parent i.e. this object (if there is any)
-                for (int i = 1; i < trails.Length; i++)
-                {
-                    ParticleSystem trail = trails[i];
-                    if (!trail.gameObject.name.Contains("Trail"))
-                        continue;
-
-                    trail.transform.SetParent(null);
-                    Destroy(trail.gameObject, 2);
-                }
+                trail.transform.SetParent(null);
+                Destroy(trail.gameObject, 2);
             }
         }
     }
+
 
     public void SetOwner(Weapon owner)
     {

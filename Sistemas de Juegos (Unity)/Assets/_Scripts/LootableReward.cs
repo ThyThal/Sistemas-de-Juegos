@@ -45,6 +45,7 @@ public class LootableReward : MonoBehaviour, ILootable
             _lootRarityRadius.GetComponent<ParticleSystem>()?.Stop();
             _weapon = null;
             _reward = null;
+            _isPlayerClose = false;
             //Destroy(this.gameObject);
         }
     }

@@ -12,6 +12,9 @@ public class BreakableObject : MonoBehaviour, IDamagable
     [SerializeField] private UnityEvent _triggerDieEvent;
     [SerializeField] private Collider _hitbox;
 
+    [SerializeField] private bool _isBreakable = false;
+    public bool IsBreakable {get { return _isBreakable; } set { _isBreakable = value; } }
+
     private void Start()
     {
         Heal(Mathf.Infinity);
@@ -19,17 +22,22 @@ public class BreakableObject : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        _currentHealth -= damage;
-        //_characterAudioHurt.PlayAudio();
+        if (_isBreakable == true)
+        {
+            _currentHealth -= damage;
+            //_characterAudioHurt.PlayAudio();
 
-        if (_currentHealth <= 0) { Die(); _triggerDieEvent.Invoke(); }
+            if (_currentHealth <= 0) { Die(); _triggerDieEvent.Invoke(); }
+        }
+
     }
     public void Die()
     {
         _destroyParticles = Instantiate(_destroyParticles, transform.position, Quaternion.identity);
         Destroy(_destroyParticles, 2f);
         _hitbox.enabled = false;
-        this.gameObject.SetActive(false);
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        _hitbox.enabled = false;
     }
 
     public void Heal(float amount)

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1983335695}
   - component: {fileID: 1983335698}
   - component: {fileID: 1983335697}
-  m_Layer: 11
-  m_Name: Sphere
-  m_TagString: Untagged
+  - component: {fileID: 206623868}
+  m_Layer: 0
+  m_Name: Range
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &206623868
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983335694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &45729825604926177
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,9 +109,9 @@ GameObject:
   - component: {fileID: 45729825604926179}
   - component: {fileID: 45729825604926178}
   - component: {fileID: 45729825604926169}
-  - component: {fileID: 45729825604926168}
   - component: {fileID: 45729825604926183}
   - component: {fileID: 45729825604926170}
+  - component: {fileID: 169751001}
   m_Layer: 11
   m_Name: Spawner
   m_TagString: Spawner
@@ -199,7 +213,13 @@ MonoBehaviour:
   - {fileID: 6202760519450575701, guid: fc9785b7ccf15cb46a922bd33129a2fc, type: 3}
   - {fileID: 3293294453450584594, guid: f918a6ccce931da428ee0a671f2b0685, type: 3}
   - {fileID: 7588924093441955796, guid: c627d049493b3d946aa85e9955094840, type: 3}
-  _spawnerTrigger: {fileID: 45729825604926168}
+  _skeletonsSelected:
+  - {fileID: 7588924093441955796, guid: c627d049493b3d946aa85e9955094840, type: 3}
+  - {fileID: 7588924093441955796, guid: c627d049493b3d946aa85e9955094840, type: 3}
+  - {fileID: 7588924093441955796, guid: c627d049493b3d946aa85e9955094840, type: 3}
+  - {fileID: 6202760519450575701, guid: fc9785b7ccf15cb46a922bd33129a2fc, type: 3}
+  - {fileID: 6202760519450575701, guid: fc9785b7ccf15cb46a922bd33129a2fc, type: 3}
+  _spawnerTrigger: {fileID: 169751001}
   _spawnerRangeTrigger: {fileID: 1983335694}
 --- !u!114 &45729825604926169
 MonoBehaviour:
@@ -213,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f07759d7f0e75a4886f2a0c1a9093a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reward: {fileID: 6881158075020286458, guid: 20af8e3d46e5f9e4c98802db779421f1, type: 3}
+  _reward: {fileID: 0}
   _weapon: {fileID: 0}
   _lootRarityRadius: {fileID: 0}
   _lootRarityBeam: {fileID: 0}
@@ -226,19 +246,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 128d92b74f07e3b42bc3554f4675fef5, type: 3}
   _pickupSource: {fileID: 45729825604926183}
   _isPlayerClose: 0
---- !u!135 &45729825604926168
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45729825604926177}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &45729825604926183
 AudioSource:
   m_ObjectHideFlags: 0
@@ -366,3 +373,16 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _hitbox: {fileID: 45729825604926179}
+--- !u!135 &169751001
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45729825604926177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}

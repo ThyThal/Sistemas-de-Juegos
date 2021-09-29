@@ -13,6 +13,7 @@ public class Skeleton : Enemy, IAttacker
     [SerializeField] private PlayerController _player;
 
     [Header("Enemy Ranges")]
+    [SerializeField] private SphereCollider _rangeCollider;
     [SerializeField] private float _playerSeekRange = 10f;
     [SerializeField] private float _playerMovementCooldown = 3.5f;
 
@@ -23,6 +24,7 @@ public class Skeleton : Enemy, IAttacker
     [SerializeField] private float _playerAttackRange = 2.25f;
     [SerializeField] private Vector2 _attackCooldown = new Vector2(5f, 11f);
     [SerializeField] private float _attackTimer = 0f;
+    [SerializeField] private float playerDistance;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class Skeleton : Enemy, IAttacker
         _damage = _enemyStats.Damage;
         _speed = _enemyStats.Speed;
         _player = GameManager.Instance.Player as PlayerController;
+        _rangeCollider.gameObject.transform.localScale = Vector3.one * _playerSeekRange * 2;
     }
 
     private void Update()
@@ -39,9 +42,9 @@ public class Skeleton : Enemy, IAttacker
 
         if (_attackTimer >= 0) { _attackTimer -= Time.deltaTime; }
 
-        if (_isActivated)
+        if (_isActivated && CurrentHealth > 0)
         {
-            var playerDistance = Vector3.Distance(_player.transform.position, transform.position);
+            playerDistance = Vector3.Distance(_player.transform.position, transform.position);
 
             if (playerDistance <= _playerSeekRange && canMove == true)
             {
@@ -104,5 +107,10 @@ public class Skeleton : Enemy, IAttacker
     {
         if (_isActivated) { _isActivated = false; }
         else { _isActivated = true; }
+    }
+
+    public void OnSkeletonDie()
+    {
+        _rangeCollider.gameObject.SetActive(false);
     }
 }

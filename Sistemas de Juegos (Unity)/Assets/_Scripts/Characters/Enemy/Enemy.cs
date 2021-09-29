@@ -20,7 +20,6 @@ public class Enemy : Character
 
     public void TriggerAnimatorDie()
     {
-        Debug.Log("Trigger 2");
         _animator.SetTrigger(_dieAnimatorID);
     }
 
