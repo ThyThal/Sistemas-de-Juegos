@@ -5,8 +5,10 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [Header("Skeleton Spawners")]
+    [SerializeField] private LootableReward _lootableReward;
     [SerializeField] private Spawner<Skeleton> _skeletonSpawner = new Spawner<Skeleton>();
     [SerializeField] private List<Skeleton> _skeletonsPrefabs;
+
 
     [ContextMenu("Spawn Enemies")]
     private void SpawnSkeletons()

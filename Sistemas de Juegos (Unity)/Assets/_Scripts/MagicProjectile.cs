@@ -67,6 +67,13 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
                 character.TakeDamage(_owner.WeaponStats.WeaponDamage);
                 CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
             }
+
+            else
+            {
+                var spawner = other.GetComponent<BreakableObject>();
+                spawner.TakeDamage(_owner.WeaponStats.WeaponDamage);
+                CameraShaker.Instance.ShakeOnce(2f, 4f, 0.1f, 1f);
+            }
             
 
             if (!hasCollided)
@@ -140,7 +147,17 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
         transform.position = Vector3.one * 9000;
         _lifeDuration = _lifeDurationOriginal;
         gameObject.SetActive(false);
-        GameManager.Instance.PlayerBulletsPool.Recycle(this.gameObject);
+
+        if (GameManager.Instance.Player.PlayerInventory.CurrentWeapon == _owner)
+        {
+            GameManager.Instance.PlayerBulletsPool.Recycle(this.gameObject);
+        }
+
+        else
+        {
+            Destroy(this.gameObject);
+            GameManager.Instance.PlayerBulletsPool.Clear();
+        }
         hasCollided = false;
     }
 

@@ -35,4 +35,10 @@ public class Pool : MonoBehaviour
         _usedPool.Remove(recycle);
         _availablePool.Add(recycle);
     }
+
+    public void Clear()
+    {
+        //_usedPool.Clear();
+        _availablePool.Clear();
+    }
 }

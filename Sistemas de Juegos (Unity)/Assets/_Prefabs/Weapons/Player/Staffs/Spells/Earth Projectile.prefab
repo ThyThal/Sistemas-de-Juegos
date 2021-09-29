@@ -87,11 +87,15 @@ MonoBehaviour:
   _projectileImpactParticles: {fileID: 100008, guid: 5815a7623bd959b46a88b3150245faae, type: 3}
   _projectileMuzzleParticles: {fileID: 141792, guid: 49ba090546afdc040ae11d4fc54617e3, type: 3}
   _projectileTrailParticles: []
+  _OGprojectileParticles: {fileID: 0}
+  _OGprojectileImpactParticles: {fileID: 0}
+  _OGprojectileMuzzleParticles: {fileID: 0}
+  _OGprojectileTrailParticles: []
   _lifeDuration: 10
   _speed: 0
   _myRigidbody: {fileID: 8101070947441270284}
   _targetLayers:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 67585
   _owner: {fileID: 0}
   impactNormal: {x: 0, y: 0, z: 0}

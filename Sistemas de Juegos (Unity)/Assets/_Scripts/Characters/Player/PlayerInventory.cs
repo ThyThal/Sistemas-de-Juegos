@@ -15,7 +15,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void LootWeapons(GameObject weapon)
     {
-
         _currentWeapon = weapon.GetComponent<Weapon>();
         _currentWeapon.Equip();
         _currentWeapon.transform.parent = _staffHolder;
