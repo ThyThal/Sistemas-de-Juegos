@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
 
-public class MagicProjectile : MonoBehaviour, IProjectile
+public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
 {
     [Header("Visual Effects Objects")]
     [SerializeField] private GameObject _projectileParticles;
@@ -12,6 +12,8 @@ public class MagicProjectile : MonoBehaviour, IProjectile
     [SerializeField] private GameObject[] _projectileTrailParticles;
 
     [Header("Projectile Info")]
+    [SerializeField] private float _lifeDuration = 10f;
+    private float _lifeDurationOriginal;
     [SerializeField] private float _speed;
     [SerializeField] private Rigidbody _myRigidbody;
     [SerializeField] private LayerMask _targetLayers;
@@ -21,11 +23,12 @@ public class MagicProjectile : MonoBehaviour, IProjectile
     public Vector3 impactNormal; //Used to rotate impactparticle.
     private bool hasCollided = false;
 
+
+
     private void Start()
     {
         _speed = _owner.WeaponStats.WeaponSpellSpeed;
-
-
+        _lifeDurationOriginal = _lifeDuration;
 
         _projectileParticles = Instantiate(_projectileParticles, transform.position, transform.rotation) as GameObject;
         _projectileParticles.transform.SetParent(transform);
@@ -66,7 +69,7 @@ public class MagicProjectile : MonoBehaviour, IProjectile
                 }
                 Destroy(_projectileParticles, 3f);
                 Destroy(_projectileImpactParticles, 5f);
-                Destroy(gameObject);
+                Reset();
                 //projectileParticle.Stop();
 
                 ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
@@ -91,16 +94,39 @@ public class MagicProjectile : MonoBehaviour, IProjectile
 
     public void Travel()
     {
-        if (transform.position == Vector3.zero)
+        _lifeDuration -= Time.deltaTime;
+
+        if (_lifeDuration <= 0)
         {
-            Debug.Log("dsadas");
+            Reset();
         }
-        Vector3 movement = transform.forward * _speed * Time.deltaTime;
-        _myRigidbody.MovePosition(transform.position + movement);
+
+        else
+        {
+            Vector3 movement = transform.forward * _speed * Time.deltaTime;
+            _myRigidbody.MovePosition(transform.position + movement);
+        }
+
     }
 
     private void Update()
     {
         Travel();
+    }
+
+    // IPoolable.
+    public bool Active { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public object Owner { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public void Reset()
+    {
+        transform.position = Vector3.one * 9000;
+        _lifeDuration = _lifeDurationOriginal;
+        gameObject.SetActive(false);
+        GameManager.Instance.PlayerBulletsPool.Recycle(this.gameObject);
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
     }
 }

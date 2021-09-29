@@ -23,12 +23,6 @@ public class Skeleton : Enemy, IAttacker
     [SerializeField] private float _playerAttackRange = 2.25f;
     [SerializeField] private Vector2 _attackCooldown = new Vector2(5f, 11f);
     [SerializeField] private float _attackTimer = 0f;
-    private Animator _animator;
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     private void Start()
     {
@@ -40,7 +34,7 @@ public class Skeleton : Enemy, IAttacker
 
     private void Update()
     {
-        _animator.SetFloat("Velocity", 0);
+        Animator.SetFloat("Velocity", 0);
         AttackMovementCooldown();
 
         if (_attackTimer >= 0) { _attackTimer -= Time.deltaTime; }
@@ -71,13 +65,13 @@ public class Skeleton : Enemy, IAttacker
     private void MoveTowardsPlayer()
     {
         _enemyAgent.SetDestination(_player.transform.position);
-        _animator.SetFloat("Velocity", _enemyAgent.velocity.magnitude);
+        Animator.SetFloat("Velocity", _enemyAgent.velocity.magnitude);
     } // Move To Player
     public void Attack()
     {
         canMove = false;
         _attackTimer = Random.Range(_attackCooldown.x, _attackCooldown.y);
-        _animator.SetTrigger("Attack");
+        Animator.SetTrigger("Attack");
     } // Do Attack
     public void OnAttack()
     {

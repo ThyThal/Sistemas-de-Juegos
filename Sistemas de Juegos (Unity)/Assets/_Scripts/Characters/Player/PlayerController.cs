@@ -12,6 +12,7 @@ public class PlayerController : Character
     [SerializeField] private PlayerAnimations _playerAnimations;
 
     [Header("Shooting Information")]
+    [SerializeField] private GameObject _currentProjectile;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private float _shootCooldown = 1f;
     [SerializeField] private bool _isAttacking = false;
@@ -28,6 +29,7 @@ public class PlayerController : Character
 
     // Player Components.
     public PlayerInventory PlayerInventory => _playerInventory;
+    public GameObject CurrentProjectile => _playerInventory.CurrentWeapon.WeaponStats.WeaponSpellPrefab;
 
     // Shooting Information.
     public Transform ShootingPoint => _shootingPoint;

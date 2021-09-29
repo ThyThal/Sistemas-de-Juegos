@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour, IEquipable, IWeapon
     {
         _isEquipped = true;
         _shootPoint = GameManager.Instance.Player.ShootingPoint;
+        GameManager.Instance.PlayerBulletsPool._originalPrefab = WeaponStats.WeaponSpellPrefab;
     }
 
     public void Unequip()

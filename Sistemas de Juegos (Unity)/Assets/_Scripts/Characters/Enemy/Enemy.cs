@@ -10,6 +10,7 @@ public class Enemy : Character
     [SerializeField] private int _dieAnimatorID;
     
     private bool _isDead;
+    public Animator Animator => _animator;
 
 
     private void Awake()

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [Header("Components")]
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private Pool _playerBulletsPool;
+    [SerializeField] private Pool _bossBulletsPool;
+    [SerializeField] private Pool _enemiesPool;
 
     [Header("Information")]
     [SerializeField] private bool _isTutorial = false;
@@ -30,6 +33,9 @@ public class GameManager : MonoBehaviour
     public bool IsTutorial => _isTutorial;
     public PlayerController Player => _playerController;
     public TutorialManager TutorialManager => _tutorialManager;
+    public Pool PlayerBulletsPool => _playerBulletsPool;
+    public Pool BossBulletsPool => _bossBulletsPool;
+    public Pool EnemiesPool => _enemiesPool;
 
     private void Start()
     {
