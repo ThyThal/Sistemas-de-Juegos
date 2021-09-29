@@ -11,6 +11,11 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
     [SerializeField] private GameObject _projectileMuzzleParticles;
     [SerializeField] private GameObject[] _projectileTrailParticles;
 
+    [SerializeField] private GameObject _OGprojectileParticles;
+    [SerializeField] private GameObject _OGprojectileImpactParticles;
+    [SerializeField] private GameObject _OGprojectileMuzzleParticles;
+    [SerializeField] private GameObject[] _OGprojectileTrailParticles;
+
     [Header("Projectile Info")]
     [SerializeField] private float _lifeDuration = 10f;
     private float _lifeDurationOriginal;
@@ -23,24 +28,33 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
     public Vector3 impactNormal; //Used to rotate impactparticle.
     private bool hasCollided = false;
 
-
+    private void Awake()
+    {
+        _OGprojectileParticles = _projectileParticles;
+        _OGprojectileImpactParticles = _projectileImpactParticles;
+        _OGprojectileMuzzleParticles = _projectileMuzzleParticles;
+        _OGprojectileTrailParticles = _projectileTrailParticles;
+    }
 
     private void Start()
+    {
+        SpawnProjectile();
+    }
+
+    private void SpawnProjectile()
     {
         _speed = _owner.WeaponStats.WeaponSpellSpeed;
         _lifeDurationOriginal = _lifeDuration;
 
-        _projectileParticles = Instantiate(_projectileParticles, transform.position, transform.rotation) as GameObject;
+        _projectileParticles = Instantiate(_OGprojectileParticles, transform.position, transform.rotation) as GameObject;
         _projectileParticles.transform.SetParent(transform);
 
         if (_projectileMuzzleParticles)
         {
-            _projectileMuzzleParticles = Instantiate(_projectileMuzzleParticles, transform.position, transform.rotation) as GameObject;
+            _projectileMuzzleParticles = Instantiate(_OGprojectileMuzzleParticles, transform.position, transform.rotation) as GameObject;
             Destroy(_projectileMuzzleParticles, 1.5f);
         }
     }
-
-
 
     public void OnTriggerEnter(Collider other)
     {
@@ -59,7 +73,11 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
             {
                 hasCollided = true;
 
-                _projectileImpactParticles = Instantiate(_projectileImpactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+                foreach (Transform child in this.transform)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
+                _projectileImpactParticles = Instantiate(_OGprojectileImpactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
 
                 foreach (GameObject trail in _projectileTrailParticles)
                 {
@@ -123,10 +141,12 @@ public class MagicProjectile : MonoBehaviour, IProjectile, IPooleable
         _lifeDuration = _lifeDurationOriginal;
         gameObject.SetActive(false);
         GameManager.Instance.PlayerBulletsPool.Recycle(this.gameObject);
+        hasCollided = false;
     }
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        SpawnProjectile();
     }
 }

@@ -218,17 +218,6 @@ Transform:
   m_Father: {fileID: 1347881971}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387450825 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704183475090594902, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
-  m_PrefabInstance: {fileID: 1507456439}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d07e32cd43c627449dd044933f0ace5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &513380010
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793347451}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1424325705}
@@ -519,10 +508,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorialManager: {fileID: 0}
-  _playerController: {fileID: 387450825}
-  _playerBulletsPool: {fileID: 0}
-  _bossBulletsPool: {fileID: 0}
-  _enemiesPool: {fileID: 0}
+  _playerController: {fileID: 1839537247}
+  _playerBulletsPool: {fileID: 1794290353}
+  _bossBulletsPool: {fileID: 1534876372}
+  _enemiesPool: {fileID: 1848279214}
   _isTutorial: 0
 --- !u!4 &901380927
 Transform:
@@ -657,6 +646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534876371}
+  - component: {fileID: 1534876372}
   m_Layer: 0
   m_Name: '[Pool] Boss Projectiles'
   m_TagString: Untagged
@@ -678,6 +668,21 @@ Transform:
   m_Father: {fileID: 901380927}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534876372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534876370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fb559dd371dc14eb0628077e9b08c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _originalPrefab: {fileID: 0}
+  _usedPool: []
+  _availablePool: []
 --- !u!1001 &1635087151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -809,6 +814,17 @@ MonoBehaviour:
   _originalPrefab: {fileID: 0}
   _usedPool: []
   _availablePool: []
+--- !u!114 &1839537247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704183475090594902, guid: 1697695adf1d3b040936752dfbeafdbe, type: 3}
+  m_PrefabInstance: {fileID: 1507456439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d07e32cd43c627449dd044933f0ace5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1848279212
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1848279213}
+  - component: {fileID: 1848279214}
   m_Layer: 0
   m_Name: '[Pool] Enemies'
   m_TagString: Untagged
@@ -839,6 +856,21 @@ Transform:
   m_Father: {fileID: 901380927}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848279214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848279212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fb559dd371dc14eb0628077e9b08c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _originalPrefab: {fileID: 0}
+  _usedPool: []
+  _availablePool: []
 --- !u!4 &1918564855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2632438372303461517, guid: f918a6ccce931da428ee0a671f2b0685, type: 3}

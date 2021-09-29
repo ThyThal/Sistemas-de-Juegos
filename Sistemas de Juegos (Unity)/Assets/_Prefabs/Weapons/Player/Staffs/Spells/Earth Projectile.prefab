@@ -83,10 +83,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c7f5f027f346943a8560522fc43204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _OGprojectileParticles: {fileID: 100008, guid: 7f6c2595e07144d408b980794a40ee34, type: 3}
-  _OGprojectileImpactParticles: {fileID: 100010, guid: 0779ad1cf28e6924c8bccb279d18eccf, type: 3}
-  _OGprojectileMuzzleParticles: {fileID: 141792, guid: 49ba090546afdc040ae11d4fc54617e3, type: 3}
-  _OGprojectileTrailParticles: []
+  _projectileParticles: {fileID: 100008, guid: 5f7cc43d7a58bdf42bdde7cf919b119c, type: 3}
+  _projectileImpactParticles: {fileID: 100008, guid: 5815a7623bd959b46a88b3150245faae, type: 3}
+  _projectileMuzzleParticles: {fileID: 141792, guid: 49ba090546afdc040ae11d4fc54617e3, type: 3}
+  _projectileTrailParticles: []
   _lifeDuration: 10
   _speed: 0
   _myRigidbody: {fileID: 8101070947441270284}
