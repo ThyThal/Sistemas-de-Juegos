@@ -21,10 +21,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 movementDirection;
     [SerializeField] private Vector3 movementDebug;
     [SerializeField] public bool isAttacking;
+    private MoveCommand _moveCommand;
 
     private void Awake()
     {
         _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
+
+    private void Start()
+    {
+        _moveCommand = new MoveCommand(_playerRigidbody, transform, movementDirection, movementSpeed);
     }
 
     public void UpdateMovementData(Vector3 newMovementDirection)
@@ -34,9 +40,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        movementDebug = CameraDirection(movementDirection);
+
         if (isAttacking == false)
         {
             MoveThePlayer();
+            //_moveCommand.Do();
         }
 
         else
@@ -75,13 +84,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movementDirection.sqrMagnitude > 0.01f)
         {
-
             Quaternion rotation = Quaternion.Slerp(_playerRigidbody.rotation,
                                                  Quaternion.LookRotation(CameraDirection(movementDirection)),
                                                  turnSpeed);
 
             _playerRigidbody.MoveRotation(rotation);
-
         }
     }
 
@@ -95,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         cameraRight.y = 0f;
 
         return cameraForward * movementDirection.z + cameraRight * movementDirection.x;
-
     }
 
 }

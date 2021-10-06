@@ -24,6 +24,8 @@ public class PlayerController : Character
     [Header("Lootable Rewards")]
     [SerializeField] private LootableReward _lootableReward;
 
+    private AttackCommand _attackCommand;
+
 
     //======================[ PROPERTIES ]======================\\
 
@@ -38,6 +40,8 @@ public class PlayerController : Character
     private void Start()
     {
         Heal(float.PositiveInfinity);
+        InitializeCommands();
+
 
         if (_defaultWeapon != null)
         {
@@ -113,5 +117,11 @@ public class PlayerController : Character
                 _lootableReward.GrabLootable();
             }
         }
+    }
+
+    /////////////
+    private void InitializeCommands()
+    {
+        _attackCommand = new AttackCommand(_playerInventory.CurrentWeapon);
     }
 }

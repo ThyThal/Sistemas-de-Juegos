@@ -127,6 +127,9 @@ public class Skeleton : Enemy, IAttacker
     public void OnSkeletonDie()
     {
         _rangeCollider.gameObject.SetActive(false);
+        _enemyAgent.enabled = false;
+        canMove = false;
+        _isAngry = false;
     }
 
     public override void TakeDamage(float damage)
