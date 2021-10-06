@@ -22,7 +22,7 @@ public class Character : MonoBehaviour, IDamagable
     public float CurrentHealth => _currentHealth;
 
     //==================== IDamagable ====================\\
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         _currentHealth -= damage;
         //_characterAudioHurt.PlayAudio();

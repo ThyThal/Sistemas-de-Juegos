@@ -21,6 +21,8 @@ public class Skeleton : Enemy, IAttacker
     private bool canMove = true;
 
     [Header("Attack Information")]
+    [SerializeField] private bool _isAngry = false;
+    [SerializeField] private bool _isAttacking = false;
     [SerializeField] private float _playerAttackRange = 2.25f;
     [SerializeField] private Vector2 _attackCooldown = new Vector2(5f, 11f);
     [SerializeField] private float _attackTimer = 0f;
@@ -31,7 +33,7 @@ public class Skeleton : Enemy, IAttacker
         CharacterData(_enemyStats.Health);
         _damage = _enemyStats.Damage;
         _speed = _enemyStats.Speed;
-        _player = GameManager.Instance.Player as PlayerController;
+        _player = GameManager.Instance.Player;
         _rangeCollider.gameObject.transform.localScale = Vector3.one * _playerSeekRange * 2;
     }
 
@@ -46,24 +48,34 @@ public class Skeleton : Enemy, IAttacker
         {
             playerDistance = Vector3.Distance(_player.transform.position, transform.position);
 
-            if (playerDistance <= _playerSeekRange && canMove == true)
+            if (!_isAttacking) // Can Move
             {
-                MoveTowardsPlayer();
+                if (playerDistance <= _playerSeekRange && canMove && !_isAngry)
+                {
+                    MoveTowardsPlayer();
+                }
+
+                else if (_isAngry && canMove)
+                {
+                    MoveTowardsPlayer();
+                }
             }
 
-            if (_attackTimer <= 0)
-            {
-
-                if (playerDistance <= _playerAttackRange)
-                {
-                    Attack();
-                }
-            }            
+            CheckAttack();
         }
     }
 
+    private void CheckAttack()
+    {
+        if (_attackTimer <= 0)
+        {
 
-
+            if (playerDistance <= _playerAttackRange)
+            {
+                Attack();
+            }
+        }
+    }
 
     private void MoveTowardsPlayer()
     {
@@ -83,6 +95,9 @@ public class Skeleton : Enemy, IAttacker
         {
             GameManager.Instance.Player.TakeDamage(_damage);
         }
+
+        _isAttacking = false;
+        canMove = true;
         
     } // Make Damage
 
@@ -112,5 +127,15 @@ public class Skeleton : Enemy, IAttacker
     public void OnSkeletonDie()
     {
         _rangeCollider.gameObject.SetActive(false);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        if (!_isAngry)
+        {
+            _isAngry = true;
+        }
     }
 }
