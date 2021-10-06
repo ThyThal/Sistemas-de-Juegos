@@ -15,13 +15,13 @@ public class LootableReward : MonoBehaviour, ILootable
 
     [Header("Events")]
     private GameObject _spawned;
-
+    public bool Spawned = false;
     public GameObject Reward => _reward;
     public Weapon Weapon => _weapon;
 
     private void Start()
     {
-        if (GameManager.Instance.IsTutorial) { SpawnReward(); }
+        //if (GameManager.Instance.IsTutorial) { SpawnReward(); }
     }
 
     public void GrabLootable()
@@ -61,6 +61,7 @@ public class LootableReward : MonoBehaviour, ILootable
             //_spawned.transform.SetParent(transform);
             _lootRarityBeam = Instantiate(_weapon.WeaponStats.RarityBeam, _spawned.transform);
             _lootRarityRadius = Instantiate(_weapon.WeaponStats.RarityRadius, _spawned.transform);
+            Spawned = true;
         }
     }
 

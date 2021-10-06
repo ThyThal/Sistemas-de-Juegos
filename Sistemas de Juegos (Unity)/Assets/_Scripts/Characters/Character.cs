@@ -20,6 +20,12 @@ public class Character : MonoBehaviour, IDamagable
 
     // Variables
     public float CurrentHealth => _currentHealth;
+    public CharacterAudio CharacterAudio => _characterAudio;
+
+    private void Awake()
+    {
+        _characterAudio = GetComponent<CharacterAudio>();
+    }
 
     //==================== IDamagable ====================\\
     public virtual void TakeDamage(float damage)
@@ -38,7 +44,11 @@ public class Character : MonoBehaviour, IDamagable
     {
         _dieParticles = Instantiate(_dieParticles, transform.position, Quaternion.identity);
         Destroy(_dieParticles, 2f);
-        GetComponent<Collider>().enabled = false;
+        var collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            GetComponent<Collider>().enabled = false;
+        }
         //this.gameObject.SetActive(false);
     }
 

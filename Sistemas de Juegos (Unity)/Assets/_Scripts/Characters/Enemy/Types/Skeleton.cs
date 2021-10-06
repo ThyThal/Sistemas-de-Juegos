@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class Skeleton : Enemy, IAttacker
 {
     [Header("Skeleton Information")]
+    [SerializeField] private Vector2 idleTimer= new Vector2(3f, 7f);
+    private float idleTime;
     [SerializeField] private NavMeshAgent _enemyAgent;
     [SerializeField] private bool _isActivated = false;
     [SerializeField] private EnemyStats _enemyStats;
@@ -35,12 +37,18 @@ public class Skeleton : Enemy, IAttacker
         _speed = _enemyStats.Speed;
         _player = GameManager.Instance.Player;
         _rangeCollider.gameObject.transform.localScale = Vector3.one * _playerSeekRange * 2;
+        idleTime = Random.Range(idleTimer.x, idleTimer.y);
     }
 
     private void Update()
     {
         Animator.SetFloat("Velocity", 0);
         AttackMovementCooldown();
+
+        if (_isActivated)
+        {
+            PlayIdleSound();
+        }
 
         if (_attackTimer >= 0) { _attackTimer -= Time.deltaTime; }
 
@@ -90,6 +98,7 @@ public class Skeleton : Enemy, IAttacker
     } // Do Attack
     public void OnAttack()
     {
+        CharacterAudio.AudioAttack.PlayAudio();
         var playerDistance = Vector3.Distance(_player.transform.position, transform.position);
         if (playerDistance <= _playerAttackRange + 0.5f)
         {
@@ -130,15 +139,32 @@ public class Skeleton : Enemy, IAttacker
         _enemyAgent.enabled = false;
         canMove = false;
         _isAngry = false;
+        _isActivated = false;
     }
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        CharacterAudio.AudioHurt.PlayAudio();
+        idleTime = Random.Range(idleTimer.x, idleTimer.y);
 
         if (!_isAngry)
         {
             _isAngry = true;
+        }
+    }
+
+    private void PlayIdleSound()
+    {
+        if (idleTime > 0)
+        {
+            idleTime -= Time.deltaTime;
+        }
+
+        else
+        {
+            idleTime = Random.Range(idleTimer.x, idleTimer.y);
+            CharacterAudio.AudioIdle.PlayAudio();
         }
     }
 }

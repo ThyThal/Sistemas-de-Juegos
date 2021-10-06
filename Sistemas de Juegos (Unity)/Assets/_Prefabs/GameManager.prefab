@@ -190,3 +190,4 @@ MonoBehaviour:
   _bossBulletsPool: {fileID: 1898984734677845148}
   _enemiesPool: {fileID: 1898984735024750310}
   _isTutorial: 0
+  _hasWon: 0

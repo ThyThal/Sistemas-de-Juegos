@@ -27,6 +27,11 @@ public class PlayerController : Character
     private AttackCommand _attackCommand;
 
 
+    private void Awake()
+    {
+        GameManager.Instance.Player = this;
+    }
+
     //======================[ PROPERTIES ]======================\\
 
     // Player Components.
@@ -112,7 +117,7 @@ public class PlayerController : Character
     {
         if (value.started)
         {
-            if (_lootableReward != null)
+            if (_lootableReward != null && _lootableReward.Spawned)
             {
                 _lootableReward.GrabLootable();
             }

@@ -5,10 +5,15 @@ using UnityEngine;
 public class CharacterAudio : MonoBehaviour
 {
     [Header("Audio Components")]
-    [SerializeField] public CharacterAudioIdle _characterAudioIdle;
-    [SerializeField] public CharacterAudioAttack _characterAudioAttack;
-    [SerializeField] public CharacterAudioWalk _characterAudioWalk;
-    [SerializeField] public CharacterAudioHurt _characterAudioHurt;
+    [SerializeField] private CharacterAudioIdle _characterAudioIdle;
+    [SerializeField] private CharacterAudioAttack _characterAudioAttack;
+    [SerializeField] private CharacterAudioWalk _characterAudioWalk;
+    [SerializeField] private CharacterAudioHurt _characterAudioHurt;
+
+    public CharacterAudioAttack AudioAttack => _characterAudioAttack;
+    public CharacterAudioIdle AudioIdle => _characterAudioIdle;
+    public CharacterAudioHurt AudioHurt => _characterAudioHurt;
+    public CharacterAudioWalk AudioWalk => _characterAudioWalk;
 
     #region // Audio Component Classes.
     [System.Serializable]

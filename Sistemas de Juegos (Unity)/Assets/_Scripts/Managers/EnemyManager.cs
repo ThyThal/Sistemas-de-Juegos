@@ -51,6 +51,7 @@ public class EnemyManager : MonoBehaviour
     {
         _isEnabled = false;
         _spawnerRangeTrigger.SetActive(false);
+        GameManager.Instance.SpawnersKilled++;
     }
 
 }
